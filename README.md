@@ -1,3 +1,4 @@
 # Slick Seed
-**WIP**
+**Work in Progress!**
+
 A template for Slick database access
