@@ -1,22 +1,26 @@
 package it.databiz.slick.seed
 
-import Application.db
-import Users._
-import slick.jdbc.H2Profile.api._
-import org.slf4j.LoggerFactory
 import com.typesafe.scalalogging.Logger
+import it.databiz.slick.seed.Users._
 import org.joda.time.DateTime
+import org.slf4j.LoggerFactory
+import slick.basic.DatabaseConfig
+import slick.jdbc.JdbcProfile
 
 import scala.concurrent.Await
-import scala.concurrent.duration.Duration
-import scala.util.Random
-import scala.language.reflectiveCalls
-
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.Duration
+import scala.language.reflectiveCalls
+import scala.util.Random
 
 object Main extends App {
 
   val logger = Logger(LoggerFactory.getLogger(this.getClass))
+
+  val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("default")
+  val db = dbConfig.db
+  import dbConfig.profile.api._
+
   val MaxUserCount = 100
 
   val random = new Random

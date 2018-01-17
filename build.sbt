@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   /* Database access related dependencies */
   "com.h2database" % "h2" % "1.4.196",
   "com.typesafe.slick" %% "slick" % "3.2.1",
+  "com.typesafe.slick" %% "slick-hikaricp" % "3.2.1",
   "com.github.tototoshi" %% "slick-joda-mapper" % "2.3.0",
   "com.jolbox" % "bonecp" % "0.8.0.RELEASE",
   /* Logging */
