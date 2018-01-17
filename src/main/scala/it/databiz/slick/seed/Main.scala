@@ -23,15 +23,13 @@ object Main extends App {
 
   val MaxUserCount = 100
 
-  val random = new Random
-
   val res = db.run((for {
     _ <- users.schema.create
     _ = users.schema.createStatements.foreach(x => logger info s"DDL statement executed: $x")
-    _ <- users ++= (0 until random.nextInt(MaxUserCount)).map(i => User(None, s"example$i@example.com", "password", DateTime.now(), false))
+    _ <- users ++= (0 until Random.nextInt(MaxUserCount)).map(i => User(None, s"example$i@example.com", "password", DateTime.now(), false))
     count <- users.count.result
     _ = logger.info(s"There are $count users in the database")
-    emailToFind = s"example${random.nextInt(MaxUserCount)}@example.com"
+    emailToFind = s"example${Random.nextInt(MaxUserCount)}@example.com"
     regTime <- users.findByEmail(emailToFind).result.map(_.headOption.map(x => x.registredAt).getOrElse("Not yet"))
     _ = logger.info(s"User with email '$emailToFind' has registered at: $regTime")
     _ = users.schema.dropStatements.foreach(x => logger info s"DROP statement executed: $x")
